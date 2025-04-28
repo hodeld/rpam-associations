@@ -1,0 +1,5 @@
+,lexicon,model_name,f1,template,setting,date
+0,sst2,gpt2-sentiment,0.92,9,internal,2024-05-13
+1,sst2,gpt2-sentiment,0.9223529411764706,9,humans,2024-05-13
+2,sst2,gpt2-sentiment,0.9152941176470588,22,internal,2024-05-13
+3,sst2,gpt2-sentiment,0.9223529411764706,22,humans,2024-05-13

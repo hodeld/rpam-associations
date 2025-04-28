@@ -1,0 +1,5 @@
+,lexicon,model_name,f1,template,setting,date
+0,sst2,mistral-7b,0.6716417910447762,9,internal,2024-05-13
+1,sst2,mistral-7b,0.93,9,humans,2024-05-13
+2,sst2,mistral-7b,0.7388059701492538,22,internal,2024-05-13
+3,sst2,mistral-7b,0.93,22,humans,2024-05-13

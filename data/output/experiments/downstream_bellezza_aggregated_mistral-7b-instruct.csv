@@ -1,0 +1,5 @@
+,lexicon,model_name,spearman_corr,pval,template,setting,date
+0,Bellezza,mistral-7b-instruct,0.7304293304880227,1.4653426040688514e-67,9,internal,2024-05-13
+1,Bellezza,mistral-7b-instruct,0.891668950396939,2.2323123598953707e-138,9,humans,2024-05-13
+2,Bellezza,mistral-7b-instruct,0.5146414577927777,2.692117428516389e-28,22,internal,2024-05-13
+3,Bellezza,mistral-7b-instruct,0.891668950396939,2.2323123598953707e-138,22,humans,2024-05-13
