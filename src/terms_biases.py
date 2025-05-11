@@ -23,7 +23,7 @@ def randomly_select_terms_length(lists, max_len=None):
     return targetx[:len_t], targety[:len_t]
 
 
-def remove_token(targetx , targety, forbidden_terms):
+def remove_token(targetx, targety, forbidden_terms):
     targetx = [t for t in targetx if t not in forbidden_terms]
     targety = [t for t in targety if t not in forbidden_terms]
     return randomly_select_terms_length([targetx, targety])
@@ -63,70 +63,55 @@ def get_bias_dic_unmodified(biases_sel=None, include_intersectional=False):
     racial_bias3 = (pleasant_2, unpleasant_2, ea_name_2, aa_name_2)
 
     # WEAT 6: We use the male and female names along with career and family attributes found
-    # here: male / female NAMES are targets!
     # Gender1
     gender1 = (career, domestic, male_name, female_name)
 
     # WEAT 7: We use the math and arts target words along with male and female attributes found
-    # here: male female are attributes
-    #gender2 = (mathematics, art, male, female)
     gender2 = (male, female, mathematics, art)
 
     # WEAT 8: We use the science and arts target words along with male and female attributes
-    # here: male female are attributes
-    #gender3 = (science, art, male, female)
     gender3 = (male, female, science, art)
 
-    gender_mistral = (['strength', 'power', 'unyielding', 'tenacity', 'courage', 'unbreakable', 'firmness', 'robustness', 'might', 'vigor'],
-                      ['nurturing', 'protection', 'care', 'empathy', 'nutrition', 'encouragement', 'cuddling', 'love', 'massage', 'healing'],
-                       male, female) # self-made
 
     # WEAT 9: We use the mental and physical disease target words along with uncontrollability and controllability attributes found in
     disease = (temporary, permanent, mental, physical)
 
     # WEAT 10: We use young and old people’s names as target words along with pleasant and unpleasant attributes found in (9).
     young_old = (pleasant, unpleasant, young, old)
-    young_old2 = (pleasant_2, unpleasant_2, young, old)
 
     # CEAT 11 # in order male, female and "European", "non-European"
-    #ceatI1 = (intersectional_aaf, intersectional_eam, african_american_female, european_american_male,)
-    ceatI1 = (intersectional_eam, intersectional_aaf,  european_american_male, african_american_female,)
+    ceatI1 = (intersectional_eam, intersectional_aaf, european_american_male, african_american_female,)
 
     # CEAT I 2
-    #ceatI2 = (emergent_intersectional_aaf, emergent_intersectional_eam_2, african_american_female, european_american_male)
-    ceatI2 = (emergent_intersectional_eam_2, emergent_intersectional_aaf, european_american_male, african_american_female, )
+    # ceatI2 = (emergent_intersectional_aaf, emergent_intersectional_eam_2, african_american_female, european_american_male)
+    ceatI2 = (
+    emergent_intersectional_eam_2, emergent_intersectional_aaf, european_american_male, african_american_female,)
 
     # CEAT I3
-    #ceatI3 = (intersectional_maf, emergent_intersectional_eam_3, mexican_american_females, european_american_male)
-    ceatI3 = (emergent_intersectional_eam_3, intersectional_maf, european_american_male, mexican_american_females, )
+    ceatI3 = (emergent_intersectional_eam_3, intersectional_maf, european_american_male, mexican_american_females,)
 
     # CEAT I4
-    #ceatI4 = (emergent_intersec_maf, emergent_intersec_eam, mexican_american_females, european_american_male)
-    ceatI4 = (emergent_intersec_eam, emergent_intersec_maf, european_american_male, mexican_american_females, )
+    ceatI4 = (emergent_intersec_eam, emergent_intersec_maf, european_american_male, mexican_american_females,)
 
     # attribute1, attribute2, target1, target2,
-
     bias_d = {
-        'flowers': (terms_flowers, 'C1 Flowers/Insects, P/U'), #1
-        'weapons': (terms_weapons, 'C2 Instruments/Weapons, P/U'), #
-        'racial1': (racial_bias1, 'C3 EA/AA names, P/U'), #
+        'flowers': (terms_flowers, 'C1 Flowers/Insects, P/U'),  # 1
+        'weapons': (terms_weapons, 'C2 Instruments/Weapons, P/U'),  #
+        'racial1': (racial_bias1, 'C3 EA/AA names, P/U'),  #
         'racial2': (racial_bias2, 'C4 EA/AA names 2, P/U'),
         'racial3': (racial_bias3, 'C5 EA/AA names, P2/U2 '),
         'gender1': (gender1, 'C6 Male/Female names, Career/Family'),
-        #'gender2': (gender2, 'C7 Male/Female terms, Math/Arts'),
         'gender2': (gender2, 'C7 Math/Arts, Male/Female terms'),
-        #'gender3': (gender3, 'C8 Male/Female terms, Science/Arts'),
         'gender3': (gender3, 'C8 Science/Arts, Male/Female terms'),
         'disease': (disease, 'C9 Mental/Physical disease, Temporary/Permanent'),
         'young_old': (young_old, 'C10 Young/Old names, P/U'),
-        #'gender_mistral': (gender_mistral, 'C15 Male/Female names, Career/Family'),
     }
     if include_intersectional:
         int_d = {
-        'ceatI1': (ceatI1, 'C11 EM/AF names, EM/AF intersectional'),
-        'ceatI2': (ceatI2, 'C12 EM/AF names, EM intersectional/AF emergent'),
-        'ceatI3': (ceatI3, 'C13 EM/MF names, EM/MF intersectional'),
-        'ceatI4': (ceatI4, 'C14 EM/MF names, EM intersectional/MF emergent'),
+            'ceatI1': (ceatI1, 'C11 EM/AF names, EM/AF intersectional'),
+            'ceatI2': (ceatI2, 'C12 EM/AF names, EM intersectional/AF emergent'),
+            'ceatI3': (ceatI3, 'C13 EM/MF names, EM/MF intersectional'),
+            'ceatI4': (ceatI4, 'C14 EM/MF names, EM intersectional/MF emergent'),
         }
         bias_d.update(int_d)
     if biases_sel:
@@ -153,7 +138,6 @@ def get_multi(tokenizer, word_set):
 
 
 def get_bias_dic(model_name='gpt2', exclude_multiple_target=False, biases_sel=None):
-
     bias_d, weat_biases = get_bias_dic_unmodified(biases_sel)
     if DO_MULTIPLY and exclude_multiple_target is False:
         return bias_d
@@ -172,7 +156,7 @@ def get_bias_dic(model_name='gpt2', exclude_multiple_target=False, biases_sel=No
         multi_terms = get_multi(tokenizer, set_terms)
         multi_terms_list.append(multi_terms)
 
-    print('multi attribute and targets, resp:', len(multi_terms_list[0]), len(multi_terms_list[1]) )
+    print('multi attribute and targets, resp:', len(multi_terms_list[0]), len(multi_terms_list[1]))
     new_bias_d = {}
     # removes on both, attributs and targets
     for key, (li, name) in bias_d.items():
@@ -181,8 +165,8 @@ def get_bias_dic(model_name='gpt2', exclude_multiple_target=False, biases_sel=No
         new_att_li, new_targ_li = [], []
         for k, (ali, newali) in enumerate([(attribut_li, new_att_li), (target_li, new_targ_li)]):
             multi_terms_i = multi_terms_list[k]  # either attribute or target
-            #if key in LIST_BIAS_NAMES:
-                #targs = ali[0]
+            # if key in LIST_BIAS_NAMES:
+            # targs = ali[0]
             ali_mod = remove_token(*ali, multi_terms_i)
             newali.extend(ali_mod)
         newli = [attribut_li, target_li]
@@ -212,7 +196,7 @@ def get_intersectional_list():
         'racial1_p1': (('poor', 'poor'), 'P1 EA names & poor/AA names & poor'),
         'gender1_p2': (('poor', 'poor'), 'P2 Male names & poor/Female names & poor'),
         'ceatI1_p3': (('poor', 'poor'), 'P3 EM names & poor/AF names & poor'),
-              }
+    }
 
     d_bias, _ = get_bias_dic_unmodified()
     suffix = '_pat'
@@ -230,7 +214,7 @@ def get_intersectional_list():
                 targs = [[l_tp.format(targ2s[i], tc), l_tp.format(tc, targ2s[i])] for tc in targs_ceat[i]]
                 targs = flatten(targs)
             targs_new.append(targs)
-        d_new[kceat] = (targs_ceat, d_bias[kceat][1]) # same as WEAT-WS
+        d_new[kceat] = (targs_ceat, d_bias[kceat][1])  # same as WEAT-WS
         d_new[k] = (targs_new, v[1])  # new
     return d_new
 
@@ -300,13 +284,3 @@ def remove_multiple_terms(model_name, term_lists):
     multi_i = get_multi(tokenizer, term_lists[0] + term_lists[1])
     atts = remove_token(*term_lists, multi_i)
     return atts
-
-
-if __name__ == "__main__":
-    #df = get_intersectional_list()
-    print_bias_pat_t()
-    #print_bias_t()
-    print()
-
-
-

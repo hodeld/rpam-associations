@@ -1,14 +1,11 @@
 import os
-
-from src.api_secrets import HF_API_TOKEN
-
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
-
+from src.api_secrets import HF_API_TOKEN
 from huggingface_hub import InferenceClient
 from transformers import GPTNeoForCausalLM, GPT2Tokenizer, GPT2LMHeadModel, T5ForConditionalGeneration, T5Tokenizer, \
-    AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig, LlamaTokenizer, MistralForCausalLM, \
+    AutoTokenizer, AutoModelForCausalLM, \
     GPT2ForSequenceClassification
-import torch
+
 
 def get_model_tokenizer(model_name='gpt2', model_cls_name=None, load_model=True):
     mod_cls_d = {'gpt-neo': (GPTNeoForCausalLM, GPT2Tokenizer),
@@ -64,7 +61,6 @@ def get_model_tokenizer(model_name='gpt2', model_cls_name=None, load_model=True)
                 mod,
             )
             model.config.use_cache = False
-            # model.save_pretrained("sharded", max_shard_size="2GB")
         else:
             model = None
     elif model_cls_name == 'gpt2-classifier':

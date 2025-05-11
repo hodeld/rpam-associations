@@ -125,11 +125,9 @@ def run_downstream_mistral_instruct(lexica=['Bellezza']):
     bellezza_terms, bellezza_valence = get_bellezza_terms()
     target_words = [pd.Series(bellezza_terms)]
 
-    # for each lexicon one df
     for lex_name, lexicon_target in zip(lexica, target_words):
         dfs = []
         for model_name in model_names:
-
             df = valence_downstream(model_name, lexicon_target, lex_name)
             # rename column from COL_VALENCE to model_name + template
             df.rename(columns={COL_VALENCE: f'{COL_VALENCE}_{model_name}',
@@ -164,7 +162,8 @@ def eval_downstream_valence_mistral_instruct(lexica=['Bellezza']):
                     df = df.join(ser)
                     # print('pearson', pearsonr(df[ground_truth_name], df[valence_name]))
                     valence_corr, pval = spearmanr(df[ground_truth_name], df[valence_name])
-                    print(f'downstream corr. with {setting}', f'template_{t_key}', lex_name, model_name, valence_corr, df.shape)
+                    print(f'downstream corr. with {setting}', f'template_{t_key}', lex_name, model_name, valence_corr,
+                          df.shape)
                     d = {'lexicon': lex_name, 'model_name': model_name,
                          'spearman_corr': valence_corr, 'pval': pval, 'template': t_key,
                          'setting': setting, 'date': datetime.now().date()}
@@ -286,7 +285,6 @@ def eval_downstream_valence(model_names, lexica=['sst2']):
                         f1 = f1_balanced_set(df[ground_truth_name], df[valence_name])
                     else:  # already converted to labels
                         f1 = f1_balanced_set_from_labels(df[ground_truth_name], df[valence_name])
-                        # f1 = f1_score(y_true=df[ground_truth_name], y_pred=df[valence_name])
                     print('F1_score: {:.3f}'.format(f1))
 
                     d = {'lexicon': lex_name, 'model_name': model_name,

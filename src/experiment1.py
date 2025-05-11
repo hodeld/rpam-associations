@@ -9,7 +9,6 @@ from src.templates import get_template_from_key
 from src.terms_biases import get_bias_dic, get_bias_dic_unmodified
 from src.RPAM import ModelWrapperBias, RUN_NR
 
-
 MODEL_NAME_D = {
     'mistral-7b-instruct': 'Mistral-7B-Instruct',
     'mistral-7b': 'Mistral-7B',
@@ -38,11 +37,7 @@ def get_ceat_d():
 
 
 def get_colors_hatches(n=20):
-    for_bidden_c = [4, 5]
-    # colors = list([plt.cm.tab20(i) for i in range(n) if i not in for_bidden_c])
     colors = list([plt.cm.tab20c(i) for i in [0, 4, 12, 16, 20]])
-    # colors = list([plt.cm.tab10(i) for i in range(10) if i not in  [2]])
-    # colors = ['#0868ac', '#43a2ca', '#7bccc4', '#bae4bc', '#f0f9e8'] # from https://colorbrewer2.org/
     hatches = ['..', '+', '\\', 'x', '--', ]
     return colors, hatches
 
@@ -65,7 +60,7 @@ def run_weat_model(model_names, bias_d, t_key=9, permutations=None):
         save(mname=model_name)
         dfs.append(df)
     df = pd.concat(dfs, axis=1)  # tdo
-    mn = 'all'  # + '_'.join(model_names)
+    mn = 'all'
     save(mn)
 
 

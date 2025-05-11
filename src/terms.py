@@ -90,9 +90,4 @@ weat_terms_vast = list(set(weat_terms_weat + dominant + arousal + submissive + i
 
 
 
-#Load in lexica
-
-#VAST
-
-
 
